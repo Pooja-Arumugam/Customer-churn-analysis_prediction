@@ -44,7 +44,7 @@
 
 # 📊 Customer Churn Analysis and Prediction
 
-![Data Model](data_model.png)
+![Data Model](./data_model.png)
 
 This project demonstrates how to combine **SQL Server**, **Power BI**, and **Machine Learning** to analyze customer behavior, predict churn, and visualize actionable insights.
 
