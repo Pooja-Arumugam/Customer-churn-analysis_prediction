@@ -1,117 +1,157 @@
-# 📊 Customer Churn Analysis and Prediction
+## 🚀 Project Overview
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-yellow.svg)](https://www.python.org/downloads/)
-[![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-brightgreen.svg)](#)
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-Data--Preparation-critical)](#)
+1️⃣ **Data Preparation (SQL Server)**  
+- Imported the dataset `customer_data` into SQL Server  
+- Created a database `data_churn`  
+- Staged and cleaned data in `stg_Churn`  
+- Created production tables and views:
+  - `vw_ChurnData` – Churned or active customers
+  - `vw_JoinData` – New customer sign-ups
 
----
+2️⃣ **Data Exploration & Transformation**
+- **SQL scripts** to:
+  - Check distinct values (e.g., Gender, State, Contract)
+  - Analyze revenue contribution by churn status
+  - Check and handle null values
+- **Power Query transformations** in Power BI:
+  - Created `Churn Status` column
+  - Binned `Monthly Charge` and `Age Group`
+  - Built lookup tables and unpivoted service columns
 
-## 🌟 Project Overview
+3️⃣ **Interactive Dashboards (Power BI)**
+- **Churn Analysis Page:**
+  - Demographics (Gender, Age Groups)
+  - Account Details (Contracts, Payment Methods)
+  - Service Usage Patterns
+  - Geographic Trends
+  - Revenue & Refunds Analysis
+- **Churn Prediction Page:**
+  - Probability of churn per customer
+  - Impact of revenue, tenure, and references
+  - Key metrics (Churn Rate, New Joiners)
 
-Customer churn can seriously impact the profitability and growth of subscription-based businesses. This project demonstrates a **complete end-to-end pipeline** to:
+4️⃣ **Machine Learning Model (Python)**
+- **Random Forest Classifier**
+  - Encoded categorical features
+  - Split data into training & test sets
+  - Trained model to predict churn
+  - Achieved **96% accuracy**
+  - Visualized feature importance
+- **Predictions on New Data**
+  - Generated churn predictions for new customers
+  - Saved results as CSV for further reporting
 
-✅ Analyze customer behavior and demographics  
-✅ Identify factors driving churn  
-✅ Predict future churn using machine learning  
-✅ Build interactive dashboards for stakeholders
+## 🗂️ Project Structure
 
-> **Tech Stack:**
->
-> - **Microsoft SQL Server:** Data ingestion, cleaning, transformation
-> - **Python (scikit-learn):** Machine learning modeling
-> - **Power BI:** Data visualization and storytelling
-> - **Excel:** Intermediate data export/import
+```text
+Customer-Churn-Analysis-and-Prediction/
+│
+├── codes/
+│   ├── sql/
+│   │   ├── data_exploration.sql
+│   │   ├── data_cleaning_and_views.sql
+│   │   └── table_creation.sql
+│   │
+│   ├── python/
+│   │   ├── churn_modeling_random_forest.ipynb
+│   │   └── prediction_script.py
+│   │
+│   ├── powerbi/
+│   │   ├── power_query_transformations.pbit
+│   │   └── measures_and_calculations.txt
+│   │
+│   └── data/
+│       ├── customer_data.xlsx
+│       └── predictions.csv
+│
+├── images/
+│   └── churn_dashboard_sample.png
+│
+├── README.md
+│
+└── LICENSE
 
----
+```
 
-## 🎯 Objectives
-
-- Clean and transform customer data in SQL Server
-- Explore churn-related trends and patterns
-- Develop a predictive model to classify churn risk
-- Present findings with compelling dashboards
-
----
-
-## ⚙️ Workflow Summary
-
-The project has **4 main phases:**
-
----
-
-### 1️⃣ Data Preparation in SQL Server
-
-**Steps:**
-
-- **Database Creation:**  
-  Created `data_churn` database.
-- **Data Import:**  
-  Imported `customer_data.csv` into a staging table (`stg_churn`).
-- **Data Cleaning:**  
-  - Adjusted column types.
-  - Standardized date formats.
-  - Handled missing values.
-- **Views for Analysis:**  
-  - `vw_churn_data` – focus on churned customers.
-  - `vw_joindatam` – track new sign-ups.
-
-✅ **SQL Scripts:**  
-[`codes/sql_data_preparation.sql`](codes/sql_data_preparation.sql)
-
----
-
-### 2️⃣ Exploratory Churn Analysis Dashboard (Power BI)
-
-Created an **interactive Power BI dashboard** to visualize:
-
-- Demographics: Age, Gender
-- Service usage: Internet, Phone services
-- Account details: Payment methods, Contracts
-- Geographic trends
-- Churn distribution
-
-✅ **Dashboard File:**  
-[`codes/powerbi_churn_analysis.pbix`](codes/powerbi_churn_analysis.pbix)
-
----
-
-### 3️⃣ Machine Learning Model for Churn Prediction
-
-**Steps:**
-
-- **Data Export:**  
-  Exported clean data from SQL Server views to Excel.
-- **Modeling:**  
-  - Logistic Regression model using `scikit-learn`
-  - Train/test split
-  - Evaluation metrics
-- **Results:**  
-  - **Accuracy:** 96%
-  - **Key Predictors:**
-    - Monthly Income
-    - Total Refunds
-    - Total Revenue
-
-✅ **Notebook:**  
-[`codes/churn_prediction_logistic_regression.ipynb`](codes/churn_prediction_logistic_regression.ipynb)
-
-✅ **Output:**  
-`joined_data_predictions.csv`
+> 📂 *All scripts and supporting materials are in the [`codes`](codes) folder.*
 
 ---
 
-### 4️⃣ Prediction Visualization Dashboard (Power BI)
+## 🛠️ How to Run the Project
 
-Developed a second Power BI dashboard to:
+### 1️⃣ SQL Server
 
-- Show churn probability per customer
-- Visualize relationships between refunds, revenue, references, and churn
+- Execute **`data_exploration.sql`** to explore data.
+- Use **`data_cleaning_and_views.sql`** to clean and create views (`vw_ChurnData`, `vw_JoinData`).
+- Validate that `prod_Churn` table is populated.
 
-✅ **Dashboard File:**  
-[`codes/powerbi_churn_prediction.pbix`](codes/powerbi_churn_prediction.pbix)
+### 2️⃣ Power BI
+
+- Import `prod_Churn` into Power BI Desktop.
+- Apply **Power Query transformations**:
+  - Create `Churn Status`, `Monthly Charge Range`, `Age Group`, `Tenure Group`.
+  - Unpivot service columns.
+- Use provided **measures and calculations** to build visuals.
+
+### 3️⃣ Python (Machine Learning)
+
+- Install dependencies:
+
+  ```bash
+  pip install pandas numpy matplotlib seaborn scikit-learn joblib
+
+```
+## 🛠️ How to Run the Python Model
+
+- Open and run:
+  - **`churn_modeling_random_forest.ipynb`** to train the model.
+  - **`prediction_script.py`** to generate predictions on `vw_JoinData`.
+- Evaluate model performance and export churn predictions.
 
 ---
 
-## 📁 Project Structure
+## ✨ Example SQL Queries
+
+Below are some example queries used during **data exploration**:
+
+```sql
+-- Gender Distribution
+SELECT Gender, COUNT(*) AS TotalCount
+FROM stg_Churn
+GROUP BY Gender;
+
+-- Revenue by Customer Status
+SELECT Customer_Status, SUM(Total_Revenue) AS TotalRev
+FROM stg_Churn
+GROUP BY Customer_Status;
+
+```
+## 🔍 Key Learnings
+
+✅ **SQL Server** is powerful for:
+- Data cleaning
+- Staging and versioning
+- Aggregating key metrics
+
+✅ **Power BI** enables:
+- Dynamic dashboards
+- Rich visual storytelling
+- Advanced DAX calculations
+
+✅ **Machine Learning** adds:
+- Predictive capabilities
+- Data-driven decision support
+
+---
+
+## 💡 Next Steps
+
+- Deploy the model using **Streamlit** for a web-based prediction app.
+- Automate data pipelines with **Azure Data Factory**.
+- Integrate real-time data refresh in Power BI.
+---
+## 🤝 Let’s Connect
+
+I’d love to hear your thoughts and experiences with churn prediction!  
+---
 
